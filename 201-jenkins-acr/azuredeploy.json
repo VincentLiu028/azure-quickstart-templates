@@ -42,7 +42,7 @@
       "defaultValue": "azureuser"
     },
     "privateRegistryPassword": {
-      "type": "string",
+      "type": "securestring",
       "metadata": {
         "description": "Password for private docker registry."
       },
@@ -52,8 +52,6 @@
   "variables": {
     "resourcePrefix": "jenkins",
     "storageAccountName": "[concat(variables('resourcePrefix'), uniquestring(resourceGroup().id))]",
-    "acrStorageAccountName": "[concat('registry', uniqueString(resourceGroup().id))]",
-    "acrName": "[uniqueString(resourceGroup().id)]",
     "OSDiskName": "[concat(variables('resourcePrefix'), 'OSDisk')]",
     "nicName": "[concat(variables('resourcePrefix'), 'VMNic')]",
     "subnetName": "[concat(variables('resourcePrefix'), 'Subnet')]",
@@ -78,26 +76,6 @@
       },
       "kind": "Storage",
       "properties": {}
-    },
-    {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('acrStorageAccountName')]",
-      "apiVersion": "2016-01-01",
-      "location": "[resourceGroup().location]",
-      "sku": {
-        "name": "Standard_LRS"
-      },
-      "kind": "Storage",
-      "properties": {
-        "encryption": {
-          "services": {
-            "blob": {
-              "enabled": true
-            }
-          },
-          "keySource": "Microsoft.Storage"
-        }
-      }
     },
     {
       "apiVersion": "2016-09-01",
