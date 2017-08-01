@@ -20,18 +20,6 @@
         "description": "Unique DNS Name for the Public IP used to access the Jenkins Virtual Machine."
       }
     },
-    "servicePrincipalAppId": {
-      "type": "string",
-      "metadata": {
-        "description": "Service Principal App ID (also called Client ID) used by Jenkins to push the docker image to Azure Container Registry."
-      }
-    },
-    "servicePrincipalAppKey": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Service Principal App Key (also called Client Secret) used by Jenkins to push the docker image to Azure Container Registry."
-      }
-    },
     "gitRepository": {
       "type": "string",
       "metadata": {
@@ -295,10 +283,6 @@
     "SSH": {
       "type": "string",
       "value": "[concat('ssh -L 8080:localhost:8080 ', parameters('adminUsername'), '@', reference(variables('publicIPAddressName')).dnsSettings.fqdn)]"
-    },
-    "azureContainerRegistryUrl": {
-      "type": "string",
-      "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', variables('acrName'))).loginServer]"
     }
   }
 }
