@@ -65,7 +65,7 @@
     "kubernetesPrivateKey": {
       "type": "securestring",
       "metadata": {
-        "description": "The private key for kubernetes master FQDN, which is begin with -----BEGIN RSA PRIVATE KEY----- and end with -----END RSA PRIVATE KEY-----"
+        "description": "The private key for kubernetes master FQDN, need to be base64 encoded"
       },
       "defaultValue": ""
     }        
