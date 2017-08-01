@@ -47,7 +47,28 @@
         "description": "Password for private docker registry."
       },
       "defaultValue": "Vl_10218"
-    }
+    },
+    "kubernetesMasterFQDN": {
+      "type": "string",
+      "metadata": {
+        "description": "Kubernetes master fqdn for deployment."
+      },
+      "defaultValue": ""
+    },
+    "kubernetesUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The login user name for kubernetes master."
+      },
+      "defaultValue": ""
+    },
+    "kubernetesPrivateKey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The private key for kubernetes master FQDN, which is begin with -----BEGIN RSA PRIVATE KEY----- and end with -----END RSA PRIVATE KEY-----"
+      },
+      "defaultValue": ""
+    }        
   },
   "variables": {
     "resourcePrefix": "jenkins",
@@ -245,7 +266,7 @@
               ]
             },
             "protectedSettings": {
-              "commandToExecute": "[concat('./' , variables('_extensionScript'),' -jf \"', reference(variables('publicIPAddressName')).dnsSettings.fqdn, '\" -u \"', parameters('adminUsername') , '\" -g \"', parameters('gitRepository') , '\" -r \"', parameters('privateRegistryUrl'), '\" -ru \"', parameters('privateRegistryUserName'), '\" -rp \"', parameters('privateRegistryPassword'), '\" -al \"', variables('_artifactsLocation'), '\" -st \"', variables('_artifactsLocationSasToken'), '\"' )]"
+              "commandToExecute": "[concat('./' , variables('_extensionScript'),' -jf \"', reference(variables('publicIPAddressName')).dnsSettings.fqdn, '\" -u \"', parameters('adminUsername') , '\" -g \"', parameters('gitRepository') , '\" -r \"', parameters('privateRegistryUrl'), '\" -ru \"', parameters('privateRegistryUserName'), '\" -rp \"', parameters('privateRegistryPassword'), '\" -al \"', variables('_artifactsLocation'), '\" -st \"', variables('_artifactsLocationSasToken'), '\" -kmf \"', parameters('kubernetesMasterFQDN'), '\" -kun \"', parameters('kubernetesUserName'), '\" -kpk \"', parameters('kubernetesPrivateKey'), '\"' )]"
             }
           }
         }
